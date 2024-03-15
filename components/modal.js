@@ -40,4 +40,4 @@ function clickClose(element) {
 
 export { handleFormSubmit, openPopUp, closePopUp, 
   escapeClose, clickClose, nameInput, jobInput, 
-  profileTitle, profileDescription };
+  profileTitle, profileDescription, profile };

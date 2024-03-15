@@ -1,6 +1,6 @@
 import { createCard, onDelete, addLike, buttonsClose, popUpS} from './components/card.js'; 
 import { handleFormSubmit, openPopUp, closePopUp, escapeClose, 
-  clickClose, nameInput, jobInput} from './components/modal.js';
+  clickClose, nameInput, jobInput, profile} from './components/modal.js';
 
 const container = document.querySelector(".page__content");
 const cardsContainer = container.querySelector(".places__list");
