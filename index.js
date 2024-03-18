@@ -8,8 +8,7 @@ import { openPopUp, closePopUp } from "./components/modal.js";
 const container = document.querySelector(".page__content");
 const cardsContainer = container.querySelector(".places__list");
 const buttonProfile = document.querySelector(".profile__edit-button");
-const buttonSave = document.querySelector(".popup__button");
-const buttonAddImage = document.querySelector(".profile__add-button");
+const buttonAddCard = document.querySelector(".profile__add-button");
 const newPlace = document.forms["new-place"];
 const cardName = newPlace["place-name"];
 const cardLink = newPlace.link;
@@ -20,7 +19,6 @@ const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 const popUpImageCaption = document.querySelector(".popup__caption");
 const popUpImage = document.querySelector(".popup__image");
-const buttonClose = document.querySelector(".popup__close");
 const popUpS = document.querySelectorAll(".popup");
 const popUpTypeImage = document.querySelector(".popup_type_image");
 const popUpAddImage = document.querySelector(".popup_type_new-card");
@@ -31,7 +29,7 @@ initialCards.forEach(function (element) {
     element,
     handleDeleteButton,
     handleLikeButton,
-    openImage
+    handleImageClick
   );
   cardsContainer.append(cardItem);
 });
@@ -66,28 +64,21 @@ function handleFormSubmit(evt) {
   const userJob = jobInput.value;
   profileTitle.textContent = userName;
   profileDescription.textContent = userJob;
+  closePopUp(popUpProfile)
 }
 
-buttonSave.addEventListener("click", function () {
-  profile.addEventListener("submit", handleFormSubmit);
-  closePopUp(popUpProfile);
-});
+profile.addEventListener('submit', handleFormSubmit)
 
-function typeNewCard() {
+function handleAddCardFormSubmit() {
   openPopUp(popUpAddImage);
-  buttonClose.addEventListener("click", function () {
-    closePopUp(popUpAddImage);
-  });
 }
 
-function openImage(event) {
+function handleImageClick(event) {
   if (event.target.classList.contains("card__image")) {
     popUpImage.src = event.target.src;
+    popUpImage.alt = event.target.alt;
     popUpImageCaption.textContent = event.target.alt;
     openPopUp(popUpTypeImage);
-    buttonClose.addEventListener("click", function () {
-      closePopUp(popUpTypeImage);
-    });
   }
 }
 
@@ -102,11 +93,11 @@ newPlace.addEventListener("submit", function (evt) {
     newObj,
     handleDeleteButton,
     handleLikeButton,
-    openImage
+    handleImageClick
   );
   cardsContainer.prepend(cardItem);
   closePopUp(popUpAddImage);
   newPlace.reset();
 });
 
-buttonAddImage.addEventListener("click", typeNewCard);
+buttonAddCard.addEventListener("click", handleAddCardFormSubmit);
